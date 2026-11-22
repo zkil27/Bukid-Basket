@@ -1,0 +1,88 @@
+%% Bukid Basket ERD — derived from database/schema.sql (MySQL / InnoDB, 2026-11-22).
+%% If this and database/schema.sql ever disagree, database/schema.sql wins.
+erDiagram
+  users ||--o{ orders : places
+  users |o--o{ stock_movements : "records (actor_id)"
+  users |o--o{ order_status_events : "changes (actor_id)"
+  categories ||--o{ products : groups
+  products ||--|{ product_variants : "sold as"
+  product_variants ||--o{ stock_movements : "ledger of"
+  product_variants ||--o{ order_items : "ordered as"
+  orders ||--|{ order_items : contains
+  orders |o--o{ stock_movements : "caused (order_id)"
+  orders ||--o{ order_status_events : "timeline of"
+
+  users {
+    char24 id PK
+    string name
+    string email UK
+    string password_hash
+    enum role "ADMIN | CUSTOMER"
+    string phone "saved delivery details, optional"
+    string address "saved delivery details, optional"
+    string barangay "saved delivery details, optional"
+    datetime created_at
+  }
+  categories {
+    char24 id PK
+    string name
+    string slug UK
+  }
+  products {
+    char24 id PK
+    string name
+    text description
+    string image_url "static /public path"
+    char24 category_id FK
+    tinyint active "soft delete"
+  }
+  product_variants {
+    char24 id PK
+    char24 product_id FK
+    string name
+    string sku UK
+    int price_centavos
+    datetime price_updated_at
+    tinyint active "soft delete"
+  }
+  stock_movements {
+    char24 id PK
+    char24 variant_id FK
+    int quantity "+ in / - out"
+    string reason
+    char24 order_id FK "optional"
+    char24 actor_id FK "optional"
+    datetime created_at "append-only"
+  }
+  orders {
+    char24 id PK
+    uint order_number UK "shown as BB-0005"
+    char24 customer_id FK
+    enum status "PENDING | CONFIRMED | READY | COMPLETED | CANCELLED"
+    enum payment_method "GCASH | COD"
+    string delivery_name
+    string delivery_phone
+    string delivery_address
+    string delivery_barangay
+    string delivery_slot
+    date delivery_date "Manila day of the slot"
+    int delivery_fee_centavos
+    int total_centavos
+    datetime created_at
+  }
+  order_items {
+    char24 id PK
+    char24 order_id FK
+    char24 variant_id FK
+    int quantity
+    int price_at_time "centavos"
+  }
+  order_status_events {
+    char24 id PK
+    char24 order_id FK
+    enum from_status "null on creation"
+    enum to_status
+    string note
+    char24 actor_id FK "optional"
+    datetime created_at "append-only"
+  }

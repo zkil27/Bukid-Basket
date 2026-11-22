@@ -1,0 +1,28 @@
+#!/bin/sh
+#
+# Universal pre-commit gate for Bukid Basket (PHP 8.2 + MySQL).
+# Runs `php scripts/verify.php` (PHP syntax lint + static footgun scan).
+# Bypass only in emergency with: git commit --no-verify
+
+echo "[pre-commit] running php scripts/verify.php ..."
+
+PHP_BIN=$(command -v php 2>/dev/null)
+if [ -z "$PHP_BIN" ] && [ -x "/c/xampp/php/php.exe" ]; then
+  PHP_BIN="/c/xampp/php/php.exe"
+fi
+
+if [ -z "$PHP_BIN" ]; then
+  echo "[pre-commit] PHP 8.2+ not found on PATH or C:/xampp/php/php.exe."
+  exit 1
+fi
+
+"$PHP_BIN" scripts/verify.php
+status=$?
+
+if [ $status -ne 0 ]; then
+  echo "[pre-commit] verify failed (exit $status). Commit aborted."
+  exit 1
+fi
+
+echo "[pre-commit] verify passed."
+exit 0

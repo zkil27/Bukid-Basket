@@ -1,0 +1,16 @@
+{
+  "version": "v1",
+  "hooks": [
+    {
+      "name": "Verify on TS change",
+      "trigger": "PostFileSave",
+      "description": "After a .ts/.tsx file is created or saved, run the same `npm run verify` (typecheck + lint + footgun scan) that the git pre-commit hook and CI run, so quality issues surface immediately while editing. This is a Kiro-only convenience layer; the universal enforcement is the committed githooks/pre-commit gate. Logic lives in package.json, not here, so the two never diverge.",
+      "matcher": "\\.(ts|tsx)$",
+      "action": {
+        "type": "command",
+        "command": "npm run verify",
+        "timeout": 180
+      }
+    }
+  ]
+}

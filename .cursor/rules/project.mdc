@@ -1,0 +1,11 @@
+---
+description: Bukid Basket project context and conventions
+alwaysApply: true
+---
+
+The full, authoritative project context lives in `AGENTS.md` at the repo root —
+read it. It covers the product, scope boundaries, tech stack, non-negotiable
+rules (centavos money, append-only stock ledger, soft-delete, single PDO
+client), commands, and the customer + admin scope.
+
+@AGENTS.md
