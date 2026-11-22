@@ -13,7 +13,7 @@ Each entry follows: **Date — summary**, then What / Why / Impact.
 **What:**
 - New `scripts/deploy.sh` (Git Bash) and `scripts/deploy.ps1` (PowerShell wrapper). They `git archive` the committed `public src views database scripts` and upload them over SSH to the FourSys host.
 - New `scripts/server-deploy.sh`, which runs on the server. It runs `scripts/verify.php` (stops on failure), rsyncs the code into `private/bukidbasket/` (outside the web root), rsyncs `public/` into `public_html/`, writes a shim `index.php`, and records `REVISION`. It never touches the server's `.env.local`.
-- New `.github/workflows/deploy.yml`. Every push to `master` (or a manual "Run workflow") verifies, deploys with `scripts/deploy.sh`, and smoke-tests the home page. It uses a GitHub-only SSH key held in the `FOURSYS_SSH_KEY` secret and the pinned host key held in `FOURSYS_KNOWN_HOSTS`.
+- New `.github/workflows/deploy.yml`. Every push to `master` (or a manual "Run workflow") verifies, deploys with `scripts/deploy.sh`, and smoke-tests the home page. It uses a GitHub-only SSH key held in the `FOURSYS_SSH_KEY` secret and the pinned host key held in `FOURSYS_KNOWN_HOSTS`. Its "Configure SSH" step repairs a pasted key (CRLF, stray spaces, lost newlines), checks it with `ssh-keygen` and prints its fingerprint. The first run failed with `Load key: error in libcrypto` because the secret had been damaged when it was pasted from the Windows clipboard.
 - `docs/deployment.md` section 6 documents the server layout, SSH setup, deploy command and database import.
 
 **Why:** The capstone is graded on a live URL, and deploying should be one repeatable command instead of manual uploads.

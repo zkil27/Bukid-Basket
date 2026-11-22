@@ -44,8 +44,13 @@ jobs:
             exit 1
           fi
           install -m 700 -d ~/.ssh
-          # Repair common paste damage: Windows CRLF, stray spaces, lost newlines.
+          # The secret may hold the key file itself or a one-line base64 copy of it
+          # (base64 survives copy-paste). Also repair CRLF, stray spaces, lost newlines.
           key=$(printf '%s' "$SSH_KEY" | tr -d '\r')
+          if ! printf '%s' "$key" | grep -q -- '-----BEGIN'; then
+            decoded=$(printf '%s' "$key" | tr -d ' \t\n' | base64 -d 2>/dev/null || true)
+            if printf '%s' "$decoded" | grep -q -- '-----BEGIN'; then key=$(printf '%s' "$decoded" | tr -d '\r'); fi
+          fi
           if [ "$(printf '%s\n' "$key" | wc -l)" -le 1 ]; then
             body=$(printf '%s' "$key" | sed -e 's/-----BEGIN OPENSSH PRIVATE KEY-----//' -e 's/-----END OPENSSH PRIVATE KEY-----//' | tr -d ' \t')
             key=$(printf -- '-----BEGIN OPENSSH PRIVATE KEY-----\n%s\n-----END OPENSSH PRIVATE KEY-----' "$(printf '%s' "$body" | fold -w 70)")
@@ -53,6 +58,11 @@ jobs:
           printf '%s\n' "$key" | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//' -e '/^$/d' > ~/.ssh/foursys
           chmod 600 ~/.ssh/foursys
           if ! ssh-keygen -y -f ~/.ssh/foursys > /dev/null; then
+            # Describe what was pasted without printing it.
+            echo "Secret length: ${#SSH_KEY} chars, $(printf '%s\n' "$SSH_KEY" | wc -l) line(s)"
+            printf '%s' "$SSH_KEY" | grep -q -- '-----BEGIN OPENSSH PRIVATE KEY' && echo "Has a BEGIN OPENSSH PRIVATE KEY header" || echo "No BEGIN OPENSSH PRIVATE KEY header"
+            printf '%s' "$SSH_KEY" | grep -q '^ssh-' && echo "Looks like a PUBLIC key (starts with ssh-); the private key is needed"
+            printf '%s' "$SSH_KEY" | grep -qiE 'Get-Content|Set-Clipboard' && echo "Looks like the PowerShell command was pasted instead of its output"
             echo "::error::FOURSYS_SSH_KEY is not a readable private key. Re-paste the whole file, from -----BEGIN to -----END (docs/deployment.md, section 6)."
             exit 1
           fi
