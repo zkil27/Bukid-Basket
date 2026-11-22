@@ -8,6 +8,22 @@ Each entry follows: **Date — summary**, then What / Why / Impact.
 > Entries below the 2026-11-22 "Bukid Basket" entry come from the Hook & Box
 > (seafood) project this copy started from. They are kept as history.
 
+## 2026-11-23 — Flash messages shown as toasts
+
+**What:**
+- `views/layouts/shop.php`, `views/layouts/admin.php`: the PHP flash message is no
+  longer an inline `.banner`; it is emitted as a hidden `#flash-data` element
+  (`data-type`, `data-msg`) with a `<noscript>` banner fallback.
+- `public/assets/app.js`: new `showFlash()` reads `#flash-data` on load and calls
+  `toast()`. Error toasts now last 5.5s (others 3.6s).
+
+**Why:** Inline banners (e.g. "Those 4 digits did not match that order.") pushed
+page content down; the app already had a toast for fetch actions, so redirects now
+use the same pattern.
+
+**Impact:** UI only. Every `flash_set()` message (shop + admin) appears as a toast.
+Static page banners in views are unchanged. No data or schema changes.
+
 ## 2026-11-23 — One-command SSH deploy to FourSys hosting
 
 **What:**

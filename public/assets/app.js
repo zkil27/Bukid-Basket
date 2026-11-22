@@ -39,8 +39,19 @@
     el.className = `toast ${type === 'err' ? 'toast-err' : type === 'ok' ? 'toast-ok' : ''}`;
     el.textContent = msg;
     host.appendChild(el);
-    setTimeout(() => el.remove(), 3600);
+    setTimeout(() => el.remove(), type === 'err' ? 5500 : 3600);
   }
+
+  // Server flash messages (PHP flash_set) are handed over as a hidden element and shown as a toast.
+  function showFlash() {
+    const node = document.getElementById('flash-data');
+    if (!node) return;
+    const { type, msg } = node.dataset;
+    node.remove();
+    if (msg) toast(msg, type === 'err' || type === 'ok' ? type : 'info');
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', showFlash);
+  else showFlash();
 
   async function post(url, body = {}) {
     const res = await fetch(url, {

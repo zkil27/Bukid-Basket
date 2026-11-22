@@ -54,9 +54,12 @@ $nav = [
 
     <main class="admin-main" id="main">
       <?php if ($f): ?>
-        <div class="banner <?= $f['type'] === 'err' ? 'banner-err' : ($f['type'] === 'ok' ? 'banner-ok' : 'banner-warn') ?> no-print" role="status" style="margin-bottom:16px;">
-          <?= e($f['message']) ?>
-        </div>
+        <div id="flash-data" hidden data-type="<?= e($f['type']) ?>" data-msg="<?= e($f['message']) ?>"></div>
+        <noscript>
+          <div class="banner <?= $f['type'] === 'err' ? 'banner-err' : ($f['type'] === 'ok' ? 'banner-ok' : 'banner-warn') ?> no-print" role="status" style="margin-bottom:16px;">
+            <?= e($f['message']) ?>
+          </div>
+        </noscript>
       <?php endif; ?>
       <?= $content ?>
     </main>
