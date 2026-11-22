@@ -94,6 +94,7 @@ $nav = [
           <ul>
             <li><a href="/about">About &amp; makers</a></li>
             <li><a href="/contact">Contact &amp; hours</a></li>
+            <li><a href="/credits">Photo credits</a></li>
           </ul>
         </div>
       </div>

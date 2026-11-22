@@ -342,9 +342,9 @@ if ($path === '/login' || $path === '/register') {
     ]);
     exit;
 }
-if ($path === '/about' || $path === '/contact') {
+if ($path === '/about' || $path === '/contact' || $path === '/credits') {
     render('shop', 'shop/static', [
-        'title' => $path === '/about' ? 'About' : 'Contact',
+        'title' => ['/about' => 'About', '/contact' => 'Contact', '/credits' => 'Photo credits'][$path],
         'user' => $user,
         'catalog' => $shopCatalog(),
         'page' => ltrim($path, '/'),

@@ -56,7 +56,7 @@ foreach ($products as $p) {
         <span class="net-weight tabular"><?= (int) $stamp['kg'] ?><small> kg</small></span>
         <span class="net-name"><?= e($sp['local']) ?> · sack</span>
         <span class="net-price"><?= e(peso((int) $stamp['variant']['price'])) ?></span>
-        <span class="caps" style="margin-top:10px;"><?= (int) $stamp['variant']['stock'] ?> sacks left · delivered tomorrow</span>
+        <span class="caps" style="margin-top:10px;"><?= (int) $stamp['variant']['stock'] ?> sacks left · order now for <?= e(strtolower(fmt_day_relative(delivery_date_for()))) ?></span>
       </a>
     <?php endif; ?>
   </section>

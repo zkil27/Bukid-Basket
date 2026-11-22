@@ -1,5 +1,7 @@
 # UI Overhaul Plan — "Palengke Price Board"
 
+> **Historical document.** Written for the earlier Hook & Box (seafood) project on its old Next.js stack, before this copy became Bukid Basket on 2026-11-22. The tools, files, roles (packer, driver) and timings described here do not exist in the current PHP build. Kept for the project record only; see `AGENTS.md` and `docs/project-overview.md` for the current app.
+
 **Status:** Approved and implemented · 2026-10-10 (see "Built vs plan" at the end)
 **Covers:** storefront `(shop)` and admin `(admin)`, end to end.
 **Product context:** [`PRODUCT.md`](../PRODUCT.md). **Direction contract:** `.impeccable/surfaces/app-shop-page-tsx.md`.

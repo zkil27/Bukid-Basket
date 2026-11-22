@@ -287,6 +287,38 @@ const CATALOG_SEED = [
     ],
 ];
 
+/** Where every shipped photo came from (Unsplash License). File => Unsplash photo id. */
+const PHOTO_SOURCES = [
+    '/products/pechay.jpg' => 'lkgqwgVOFXg',
+    '/products/kangkong.jpg' => 'Y2xyssByhdc',
+    '/products/sitaw.jpg' => 'lKOyPyPiCbs',
+    '/products/talong.jpg' => 'cZOM9Hk5hfM',
+    '/products/ampalaya.jpg' => 'nPnOiU3Tqec',
+    '/products/kamatis.jpg' => 'HrCatSbULFY',
+    '/products/sibuyas.jpg' => 'dmlyEy_VK30',
+    '/products/kalabasa.jpg' => 't0R-Z7G19Ms',
+    '/products/okra.jpg' => 'YdEqtthgAPk',
+    '/products/mangga.jpg' => 'McxsrN3WW48',
+    '/products/saging.jpg' => 'Wim9GsDlHEU',
+    '/products/calamansi.jpg' => '3a6bRScDqLI',
+    '/products/papaya.jpg' => '_fElrSBIjjQ',
+    '/products/pinya.jpg' => 'HrdNNoG_y-A',
+    '/products/native-chicken.jpg' => 'Q7Hojjihiv4',
+    '/products/liempo.jpg' => '4sb6zSB15y4',
+    '/products/kasim.jpg' => 'PytneMLhCXs',
+    '/products/tadyang.jpg' => 'P7Um6_hkwbU',
+    '/products/chicken-thigh.jpg' => 'Wt8BLNrgVvQ',
+    '/products/itlog.jpg' => 'leOh1CzRZVQ',
+    '/products/itlog-pula.jpg' => 'ZO9QyVAYhyk',
+    '/products/dinorado.jpg' => '-LdilhDx3sk',
+    '/products/sinandomeng.jpg' => 'n2sy8zlngYo',
+    '/products/malagkit.jpg' => 'xmuIgjuQG0M',
+    '/products/mais.jpg' => 'K7tjKGxIVeY',
+    '/scenes/market-stall.jpg' => 'c9lDBZBuc8E',
+    '/scenes/rice-terraces.jpg' => 'U_ZwA1CTr18',
+    '/scenes/rice-sacks.jpg' => '5ze1ouvzSM8',
+];
+
 function image_for_name(string $name): ?string
 {
     foreach (CATALOG_SEED as $cat) {

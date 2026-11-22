@@ -1,5 +1,7 @@
 # Performance
 
+> **Historical document.** Written for the earlier Hook & Box (seafood) project on its old Next.js stack, before this copy became Bukid Basket on 2026-11-22. The tools, files, roles (packer, driver) and timings described here do not exist in the current PHP build. Kept for the project record only; see `AGENTS.md` and `docs/project-overview.md` for the current app.
+
 Why the admin (and parts of the storefront) were slow, what changed on
 2026-11-05, how to measure, and what was deliberately not done.
 

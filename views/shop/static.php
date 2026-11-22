@@ -11,14 +11,14 @@ declare(strict_types=1);
       </div>
       <figure class="story-figure" style="position:relative;z-index:1;">
         <img src="/scenes/rice-terraces.jpg" alt="Farmers working on terraced rice fields" width="800" height="600">
-        <figcaption>Rice terraces at planting time. Stock photo; see photo credits.</figcaption>
+        <figcaption>Rice terraces at planting time. Stock photo · <a href="/credits">photo credits</a></figcaption>
       </figure>
     </section>
 
     <section class="grid-2" style="align-items:center;">
       <figure class="story-figure">
         <img src="/scenes/market-stall.jpg" alt="A market stall stacked with fresh fruit and vegetables" width="800" height="600" loading="lazy">
-        <figcaption>A produce stall at the market. Stock photo; see photo credits.</figcaption>
+        <figcaption>A produce stall at the market. Stock photo · <a href="/credits">photo credits</a></figcaption>
       </figure>
       <div class="stack-sm measure">
         <h2 class="display section-title">Every count is on the record</h2>
@@ -61,8 +61,31 @@ declare(strict_types=1);
       </div>
       <figure class="story-figure">
         <img src="/scenes/rice-sacks.jpg" alt="Sacks of rice stacked in a store" width="800" height="600" loading="lazy">
-        <figcaption>Rice by the sack. Stock photo; see photo credits.</figcaption>
+        <figcaption>Rice by the sack. Stock photo · <a href="/credits">photo credits</a></figcaption>
       </figure>
+    </div>
+  </div>
+<?php elseif ($page === 'credits'): ?>
+  <div class="stack" style="max-width:860px;">
+    <div>
+      <h1 class="display page-title">Photo credits</h1>
+      <p class="ink-2 measure" style="margin:10px 0 0;">Every photo on Bukid Basket is a stock photo from <a href="https://unsplash.com">Unsplash</a>, used under the <a href="https://unsplash.com/license">Unsplash License</a>. They show each product in general, not our own stock, because the shop is fictional.</p>
+    </div>
+    <div class="card table-wrap" style="padding:0;">
+      <table class="data">
+        <thead><tr><th>Photo</th><th>Used for</th><th>Source</th></tr></thead>
+        <tbody>
+          <?php foreach (PHOTO_SOURCES as $file => $id):
+            $label = ucwords(str_replace('-', ' ', pathinfo($file, PATHINFO_FILENAME)));
+          ?>
+            <tr>
+              <td><img src="<?= e($file) ?>" alt="" width="64" height="48" loading="lazy" style="width:64px;height:48px;object-fit:cover;border-radius:4px;border:1.5px solid var(--ink);"></td>
+              <td><?= e($label) ?></td>
+              <td><a href="https://unsplash.com/photos/<?= e($id) ?>" rel="noopener">unsplash.com/photos/<?= e($id) ?></a></td>
+            </tr>
+          <?php endforeach; ?>
+        </tbody>
+      </table>
     </div>
   </div>
 <?php else: ?>

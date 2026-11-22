@@ -1,5 +1,7 @@
 # Developer tools (`/admin/dev`)
 
+> **Historical document.** Written for the earlier Hook & Box (seafood) project on its old Next.js stack, before this copy became Bukid Basket on 2026-11-22. The tools, files, roles (packer, driver) and timings described here do not exist in the current PHP build. Kept for the project record only; see `AGENTS.md` and `docs/project-overview.md` for the current app.
+
 A developer-only section of the admin for checking the live build: is it
 healthy, is it fast, is the data right, and does every UI state look right.
 It is not a staff feature and adds no customer-facing capability (recorded in

@@ -305,9 +305,6 @@ table.data tr:last-child td { border-bottom: none; }
 }
 .harvest-title { font-size: clamp(3.4rem, 10vw, 6rem); }
 .harvest-lede { font-size: 18px; color: var(--ink-2); max-width: 46ch; margin: 18px 0 22px; }
-.harvest-meta { display: flex; flex-wrap: wrap; gap: 8px 20px; font-size: 14px; font-weight: 800; color: var(--ink-2); text-transform: uppercase; letter-spacing: 0.04em; }
-.harvest-meta span { display: inline-flex; align-items: center; gap: 8px; }
-.harvest-meta span::before { content: ""; width: 8px; height: 8px; background: var(--green); }
 
 /* Net-weight stamp */
 .net-stamp {

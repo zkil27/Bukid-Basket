@@ -5,6 +5,42 @@ Every change an AI agent makes to this repository is recorded here, per the
 
 Each entry follows: **Date — summary**, then What / Why / Impact.
 
+> Entries below the 2026-11-22 "Bukid Basket" entry come from the Hook & Box
+> (seafood) project this copy started from. They are kept as history.
+
+## 2026-11-22 — Bukid Basket: farm-goods rebrand, customer + admin only, rice-sack redesign
+
+**What:**
+- **New project folder and repo.** Copied the Hook & Box PHP app to `c:\dev\Bukid Basket` with a fresh `git init` (no history, no commits yet) and its own database name, `bukidbasket`. The original project and its `hookandbox` database are untouched.
+- **Brand.** Renamed to **Bukid Basket**, a fictional farm-goods seller in Dasmariñas City, Cavite. Makers credited as **EJ and Kiel** only (footer, About page, receipt, README, docs). Order codes now read `BB-0001`.
+- **Catalog (`database/catalog-data.php`).** Replaced the 26 seafood products with 25 farm products in 5 categories (Vegetables & Greens, Fruits, Meat & Poultry, Eggs, Rice & Grains; 39 packs: weights, bundles, trays, pieces and 25 kg sacks). Dish tags are now sinigang, adobo, tinola, pinakbet, nilaga, ensalada. Added `PHOTO_SOURCES`.
+- **Removed packer and driver.** Deleted `src/services/trips.php`, `views/staff/*`, `views/layouts/staff.php`, `views/partials/bag-label.php` and `views/admin/dispatch.php`. Removed the `/staff*`, `/api/staff/*`, `/api/trips/*`, `/admin/dispatch` and `/api/admin/orders/deliver` routes, the `PACKED` status, the trip and PIN constants, and bag-label printing in JS and CSS.
+- **Schema (`database/schema.sql`).** Dropped the `trips` table and the `orders.trip_id`, `stop_index`, `loaded_at`, `handoff_pin` and `pin_attempts` columns. `users.role` is `ENUM('CUSTOMER','ADMIN')`. The status enums no longer include `PACKED`. The file now starts with `DROP TABLE IF EXISTS` so an import is a clean reset.
+- **Order flow (`src/meta.php`, `src/services/orders.php`, `src/services/dashboard.php`).** `PENDING → CONFIRMED → READY ("Out for delivery") → COMPLETED`. The admin advances every step, one at a time or in bulk, and can undo the last one. COD is collected on COMPLETED, GCash on confirm. Removed the dashboard's trip and no-PIN panels.
+- **Seed (`database/seed.php`).** Admins are now `ej@bukidbasket.ph` and `kiel@bukidbasket.ph` (password `admin123`). Removed the other staff accounts and all trip and packing events. The order history uses the new flow and the farm catalog.
+- **UI redesign ("rice-sack print", via the impeccable skill).** Rewrote `public/assets/app.css` and `public/assets/app.js`, both layouts, and every shop and admin view:
+  - Two flexo inks (red `#C8202F`, green `#1F6B3A`) plus key black on sack white `#F4F1E8`, with a woven texture, stitched seams and halftone.
+  - Archivo variable font. New inline SVG seal and sack-shaped basket (`views/partials/brand.php`).
+  - Shared product card in `views/partials/sack-label.php`.
+  - Signature interaction: Add stamps a "Lot ####" on the photo and the basket count ticks. Admin uses a green "Confirmed" stamp on confirm.
+  - Reduced motion respected.
+  - New `/credits` page and `favicon.svg`. New 404 page.
+- **Photos.** Replaced all seafood photos with 25 product photos and 3 scene photos from Unsplash. Each embeds its origin (`impeccable embed-prompt`).
+- **Checks.** `scripts/verify.php` replaces the old `handoff_pin` view rule with one that fails on any `PACKER`/`DRIVER`/`trip_id`/`handoff_pin`/`trips` table code. `scripts/check-db.php` drops `trips` and prints `BB-` codes. The CI workflow runs on `dev` and `master`.
+- **Design records.** New surface brief `.impeccable/surfaces/views-shop-home-php.md` (replacing the orphaned one). Rewrote `PRODUCT.md` and `DESIGN.md`. Removed stale Next.js-era Kiro steering files.
+
+**Why:** The user asked for the whole UI to be redesigned from seafood to farm goods with the impeccable skill, for the app to be simplified to admin and customer only, for a new name, and for EJ and Kiel as the only makers. The user also asked for the work to happen in a separate folder so the original project stays intact.
+
+**Impact:**
+- **Fresh database.** Create `bukidbasket`, import `database/schema.sql`, then run `php database/seed.php`. The schema is not compatible with the old `hookandbox` data.
+- **Old URLs.** `/staff`, `/staff/pack`, `/staff/load`, `/staff/trip` and `/admin/dispatch` now return 404.
+- **Customer view.** The tracking page shows four steps (Placed, Confirmed, Out for delivery, Delivered) with no PIN, driver or stop number.
+- **Docs updated:** `AGENTS.md`, `README.md`, `PRODUCT.md`, `DESIGN.md`, and these files in `docs/`:
+  - `scope.md`, `data-model.md`, `diagrams/erd.mmd`, `project-overview.md`
+  - `deployment.md`, `demo-runbook.md`, `security.md`
+  - `design/photo-credits.md`
+  - `dev-tools.md`, `performance.md` and `ui-overhaul-plan.md`, marked historical
+
 ## 2026-11-22 — Restructure application to Vanilla PHP 8.2 + MySQL
 
 **What:**

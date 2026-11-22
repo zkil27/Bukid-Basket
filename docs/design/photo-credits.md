@@ -1,45 +1,45 @@
 # Photo credits
 
-All photos are from [Unsplash](https://unsplash.com) under the [Unsplash License](https://unsplash.com/license) (free to use, no permission needed; credit given as courtesy). Downloaded 2026-10-10. Each file also carries its source in embedded metadata (`impeccable embed-prompt --read <file>`).
+All photos are from [Unsplash](https://unsplash.com) under the [Unsplash License](https://unsplash.com/license) (free to use, no permission needed; credit given as courtesy). Downloaded 2026-11-22 at 1000 px wide. Each file also carries its source in embedded metadata (`impeccable embed-prompt --read <file>`), and the live site lists them all at `/credits` (data: `PHOTO_SOURCES` in `database/catalog-data.php`).
 
-Photos show the species or dish in general. They are not photos of Hook & Box stock (the business is fictional).
+The photos show each product in general. They are not photos of Bukid Basket stock (the business is fictional). A few are close stand-ins rather than the exact Philippine variety: leafy greens for kangkong, limes and lemons for calamansi, a red-dyed egg for itlog na pula, cooked white rice for malagkit, and chicken drumsticks for hita ng manok.
 
 ## Products (`public/products/`)
 
-| File | Photographer | Source |
-|---|---|---|
-| `bangus.jpg` | jebin ephrimraj | [unsplash.com/photos/a-bunch-of-fish-that-are-on-some-ice-ltNBkFcn2Es](https://unsplash.com/photos/a-bunch-of-fish-that-are-on-some-ice-ltNBkFcn2Es) |
-| `tilapia.jpg` | engin akyurt | [unsplash.com/photos/a-bunch-of-fish-that-are-on-some-ice-buf2kUxGOXU](https://unsplash.com/photos/a-bunch-of-fish-that-are-on-some-ice-buf2kUxGOXU) |
-| `galunggong.jpg` | Alexander Zvir | [unsplash.com/photos/a-bunch-of-fish-that-are-on-some-ice-B5Nys5HUUVY](https://unsplash.com/photos/a-bunch-of-fish-that-are-on-some-ice-B5Nys5HUUVY) |
-| `tamban.jpg` | Romeio Paul | [unsplash.com/photos/a-pile-of-fish-7CDmNCJdcc8](https://unsplash.com/photos/a-pile-of-fish-7CDmNCJdcc8) |
-| `tulingan.jpg` | David Todd McCarty | [unsplash.com/photos/silver-fish-on-black-plastic-pack-ccE1IAGnTwA](https://unsplash.com/photos/silver-fish-on-black-plastic-pack-ccE1IAGnTwA) |
-| `maya-maya.jpg` | MChe Lee | [unsplash.com/photos/fresh-fish-displayed-on-ice-at-market-stall-HlyXWPUPZcE](https://unsplash.com/photos/fresh-fish-displayed-on-ice-at-market-stall-HlyXWPUPZcE) |
-| `lapu-lapu.jpg` | Mohamad Mostafa Salehi | [unsplash.com/photos/two-fresh-fish-resting-on-ice-9hNmTVkKwNY](https://unsplash.com/photos/two-fresh-fish-resting-on-ice-9hNmTVkKwNY) |
-| `dilis.jpg` | Ahtziri Lagarde | [unsplash.com/photos/a-pile-of-fish-IGfVtrk3kgw](https://unsplash.com/photos/a-pile-of-fish-IGfVtrk3kgw) |
-| `salmon-belly.jpg` | Caroline Attwood | [unsplash.com/photos/raw-fish-meat-on-brown-chopping-board-kC9KUtSiflw](https://unsplash.com/photos/raw-fish-meat-on-brown-chopping-board-kC9KUtSiflw) |
-| `tanigue.jpg` | Ben Wicks | [unsplash.com/photos/shallow-focus-photo-of-fish-on-stainless-steel-surface-3NU0OTivB9E](https://unsplash.com/photos/shallow-focus-photo-of-fish-on-stainless-steel-surface-3NU0OTivB9E) |
-| `hipon.jpg` | Bai Z | [unsplash.com/photos/a-bucket-full-of-shrimp-sitting-on-top-of-a-table--3JrrX2qHpY](https://unsplash.com/photos/a-bucket-full-of-shrimp-sitting-on-top-of-a-table--3JrrX2qHpY) |
-| `tahong.jpg` | NOAA | [unsplash.com/photos/a-bunch-of-mussels-that-are-laying-on-the-ground-sFidHiTDcjY](https://unsplash.com/photos/a-bunch-of-mussels-that-are-laying-on-the-ground-sFidHiTDcjY) |
-| `talaba.jpg` | Mitili Mitili | [unsplash.com/photos/a-pile-of-oysters-sitting-on-top-of-each-other-Aj40vzc1VqU](https://unsplash.com/photos/a-pile-of-oysters-sitting-on-top-of-each-other-Aj40vzc1VqU) |
-| `halaan.jpg` | Charles Chen | [unsplash.com/photos/a-basket-filled-with-fresh-clams-VIepLKCOBWs](https://unsplash.com/photos/a-basket-filled-with-fresh-clams-VIepLKCOBWs) |
-| `scallops.jpg` | EMANUELE Ricciardi | [unsplash.com/photos/fresh-scallops-in-shells-with-roe-on-ice-lr5MEXf8JPc](https://unsplash.com/photos/fresh-scallops-in-shells-with-roe-on-ice-lr5MEXf8JPc) |
-| `sugpo.jpg` | Gineesh Madapparambath | [unsplash.com/photos/a-bunch-of-shrimp-that-are-laying-on-the-ground-x_eKwPeapwU](https://unsplash.com/photos/a-bunch-of-shrimp-that-are-laying-on-the-ground-x_eKwPeapwU) |
-| `curacha.jpg` | Jason Leung | [unsplash.com/photos/a-bunch-of-crabs-that-are-on-some-ice-HE7IP_mfD1Y](https://unsplash.com/photos/a-bunch-of-crabs-that-are-on-some-ice-HE7IP_mfD1Y) |
-| `alimasag.jpg` | Brian Wangenheim | [unsplash.com/photos/a-pile-of-blue-crabs-sitting-on-top-of-a-table-yoFKODAl13k](https://unsplash.com/photos/a-pile-of-blue-crabs-sitting-on-top-of-a-table-yoFKODAl13k) |
-| `alimango.jpg` | J Thomas | [unsplash.com/photos/gray-crabs-lot-vM1Lz1ftMU8](https://unsplash.com/photos/gray-crabs-lot-vM1Lz1ftMU8) |
-| `talangka.jpg` | Mae Mu | [unsplash.com/photos/brown-crab-on-brown-surface-rXDCb-Bmgdg](https://unsplash.com/photos/brown-crab-on-brown-surface-rXDCb-Bmgdg) |
-| `pusit.jpg` | hlgiovanni | [unsplash.com/photos/a-close-up-view-of-many-fresh-squid-piled-together-55Q0EOXTl4Q](https://unsplash.com/photos/a-close-up-view-of-many-fresh-squid-piled-together-55Q0EOXTl4Q) |
-| `pusit-bisaya.jpg` | Victor Ung | [unsplash.com/photos/a-bunch-of-fish-that-are-on-a-table-izr6Ck2oGdI](https://unsplash.com/photos/a-bunch-of-fish-that-are-on-a-table-izr6Ck2oGdI) |
-| `pugita.jpg` | engin akyurt | [unsplash.com/photos/close-up-of-an-octopus-on-ice-r1YI_U4LNCg](https://unsplash.com/photos/close-up-of-an-octopus-on-ice-r1YI_U4LNCg) |
-| `daing.jpg` | Prasongsom Punyauppa-path | [unsplash.com/photos/dried-fish-displayed-at-a-market-stall-1Ni-izUUkg0](https://unsplash.com/photos/dried-fish-displayed-at-a-market-stall-1Ni-izUUkg0) |
-| `tinapa.jpg` | Egor Myznik | [unsplash.com/photos/smoked-fish-on-brown-paper-sKIQELvu0Zc](https://unsplash.com/photos/smoked-fish-on-brown-paper-sKIQELvu0Zc) |
-| `sisig.jpg` | Christian Dala | [unsplash.com/photos/a-bowl-of-food-on-a-wooden-table-LsJyL1h7YNY](https://unsplash.com/photos/a-bowl-of-food-on-a-wooden-table-LsJyL1h7YNY) |
-| `tocino.jpg` | James Lo | [unsplash.com/photos/two-fish-fillets-seasoned-and-wrapped-in-banana-leaves-130yBbLm9-s](https://unsplash.com/photos/two-fish-fillets-seasoned-and-wrapped-in-banana-leaves-130yBbLm9-s) |
+| File | Product | Photographer | Source |
+|---|---|---|---|
+| `pechay.jpg` | Pechay | Jasmine Waheed | [unsplash.com/photos/lkgqwgVOFXg](https://unsplash.com/photos/lkgqwgVOFXg) |
+| `kangkong.jpg` | Kangkong | engin akyurt | [unsplash.com/photos/Y2xyssByhdc](https://unsplash.com/photos/Y2xyssByhdc) |
+| `sitaw.jpg` | Sitaw | see source page | [unsplash.com/photos/lKOyPyPiCbs](https://unsplash.com/photos/lKOyPyPiCbs) |
+| `talong.jpg` | Talong | nilufar nattaq | [unsplash.com/photos/cZOM9Hk5hfM](https://unsplash.com/photos/cZOM9Hk5hfM) |
+| `ampalaya.jpg` | Ampalaya | Imad 786 | [unsplash.com/photos/nPnOiU3Tqec](https://unsplash.com/photos/nPnOiU3Tqec) |
+| `kamatis.jpg` | Kamatis | engin akyurt | [unsplash.com/photos/HrCatSbULFY](https://unsplash.com/photos/HrCatSbULFY) |
+| `sibuyas.jpg` | Sibuyas | engin akyurt | [unsplash.com/photos/dmlyEy_VK30](https://unsplash.com/photos/dmlyEy_VK30) |
+| `kalabasa.jpg` | Kalabasa | see source page | [unsplash.com/photos/t0R-Z7G19Ms](https://unsplash.com/photos/t0R-Z7G19Ms) |
+| `okra.jpg` | Okra | Suri Huang | [unsplash.com/photos/YdEqtthgAPk](https://unsplash.com/photos/YdEqtthgAPk) |
+| `mangga.jpg` | Mangga | see source page | [unsplash.com/photos/McxsrN3WW48](https://unsplash.com/photos/McxsrN3WW48) |
+| `saging.jpg` | Saging Lakatan | Daniel Dan | [unsplash.com/photos/Wim9GsDlHEU](https://unsplash.com/photos/Wim9GsDlHEU) |
+| `calamansi.jpg` | Calamansi | see source page | [unsplash.com/photos/3a6bRScDqLI](https://unsplash.com/photos/3a6bRScDqLI) |
+| `papaya.jpg` | Papaya | Amanda Lins | [unsplash.com/photos/_fElrSBIjjQ](https://unsplash.com/photos/_fElrSBIjjQ) |
+| `pinya.jpg` | Pinya | Juno Jo | [unsplash.com/photos/HrdNNoG_y-A](https://unsplash.com/photos/HrdNNoG_y-A) |
+| `native-chicken.jpg` | Manok Tagalog | Hayley Ryczek | [unsplash.com/photos/Q7Hojjihiv4](https://unsplash.com/photos/Q7Hojjihiv4) |
+| `liempo.jpg` | Liempo | see source page | [unsplash.com/photos/4sb6zSB15y4](https://unsplash.com/photos/4sb6zSB15y4) |
+| `kasim.jpg` | Kasim | see source page | [unsplash.com/photos/PytneMLhCXs](https://unsplash.com/photos/PytneMLhCXs) |
+| `tadyang.jpg` | Tadyang | Lucas Vinicius Peixoto | [unsplash.com/photos/P7Um6_hkwbU](https://unsplash.com/photos/P7Um6_hkwbU) |
+| `chicken-thigh.jpg` | Hita ng Manok | see source page | [unsplash.com/photos/Wt8BLNrgVvQ](https://unsplash.com/photos/Wt8BLNrgVvQ) |
+| `itlog.jpg` | Itlog | Erol Ahmed | [unsplash.com/photos/leOh1CzRZVQ](https://unsplash.com/photos/leOh1CzRZVQ) |
+| `itlog-pula.jpg` | Itlog na Pula | see source page | [unsplash.com/photos/ZO9QyVAYhyk](https://unsplash.com/photos/ZO9QyVAYhyk) |
+| `dinorado.jpg` | Dinorado | Pierre Bamin | [unsplash.com/photos/-LdilhDx3sk](https://unsplash.com/photos/-LdilhDx3sk) |
+| `sinandomeng.jpg` | Sinandomeng | Nathan Cima | [unsplash.com/photos/n2sy8zlngYo](https://unsplash.com/photos/n2sy8zlngYo) |
+| `malagkit.jpg` | Malagkit | see source page | [unsplash.com/photos/xmuIgjuQG0M](https://unsplash.com/photos/xmuIgjuQG0M) |
+| `mais.jpg` | Mais | Cristina Anne Costello | [unsplash.com/photos/K7tjKGxIVeY](https://unsplash.com/photos/K7tjKGxIVeY) |
 
 ## Scenes (`public/scenes/`)
 
-| File | Photographer | Source |
-|---|---|---|
-| `catch-on-ice.jpg` | Mike Bergmann | [unsplash.com/photos/fresh-seafood-on-crushed-ice-tHjXXy1kk_Q](https://unsplash.com/photos/fresh-seafood-on-crushed-ice-tHjXXy1kk_Q) |
-| `cold-box.jpg` | Ionut Vlad | [unsplash.com/photos/fresh-fish-in-styrofoam-container-VZEWYsmHDwE](https://unsplash.com/photos/fresh-fish-in-styrofoam-container-VZEWYsmHDwE) |
-| `market-stall.jpg` | Kseniia Zapiatkina | [unsplash.com/photos/fresh-fish-and-shrimp-displayed-at-a-market-e6TRJRgNcSo](https://unsplash.com/photos/fresh-fish-and-shrimp-displayed-at-a-market-e6TRJRgNcSo) |
+| File | Used on | Photographer | Source |
+|---|---|---|---|
+| `market-stall.jpg` | About | shawn kim | [unsplash.com/photos/c9lDBZBuc8E](https://unsplash.com/photos/c9lDBZBuc8E) |
+| `rice-terraces.jpg` | About | see source page | [unsplash.com/photos/U_ZwA1CTr18](https://unsplash.com/photos/U_ZwA1CTr18) |
+| `rice-sacks.jpg` | Contact | Sonder Quest | [unsplash.com/photos/5ze1ouvzSM8](https://unsplash.com/photos/5ze1ouvzSM8) |
+
+"See source page" means the photographer's name wasn't confirmed when the photo was picked; the Unsplash page names them. Fill these in before final submission if you want full courtesy credit.
