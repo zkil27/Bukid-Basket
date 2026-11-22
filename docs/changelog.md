@@ -8,6 +8,18 @@ Each entry follows: **Date — summary**, then What / Why / Impact.
 > Entries below the 2026-11-22 "Bukid Basket" entry come from the Hook & Box
 > (seafood) project this copy started from. They are kept as history.
 
+## 2026-11-23 — One-command SSH deploy to FourSys hosting
+
+**What:**
+- New `scripts/deploy.sh` (Git Bash) and `scripts/deploy.ps1` (PowerShell wrapper). They `git archive` the committed `public src views database scripts` and upload them over SSH to the FourSys host.
+- New `scripts/server-deploy.sh`, which runs on the server. It runs `scripts/verify.php` (stops on failure), rsyncs the code into `private/bukidbasket/` (outside the web root), rsyncs `public/` into `public_html/`, writes a shim `index.php`, and records `REVISION`. It never touches the server's `.env.local`.
+- New `.github/workflows/deploy.yml`. Every push to `master` (or a manual "Run workflow") verifies, deploys with `scripts/deploy.sh`, and smoke-tests the home page. It uses a GitHub-only SSH key held in the `FOURSYS_SSH_KEY` secret and the pinned host key held in `FOURSYS_KNOWN_HOSTS`.
+- `docs/deployment.md` section 6 documents the server layout, SSH setup, deploy command and database import.
+
+**Why:** The capstone is graded on a live URL, and deploying should be one repeatable command instead of manual uploads.
+
+**Impact:** `src/`, `database/` and `.env.local` can't be reached over HTTP. Only committed code goes live. No app code changed. The live MariaDB database was imported from `database/schema.sql` and seeded, and `scripts/check-db.php` passes on it. The server's `.env.local` must use `DB_HOST=127.0.0.1`, because `localhost` fails with a socket error.
+
 ## 2026-11-22 — Bukid Basket: farm-goods rebrand, customer + admin only, rice-sack redesign
 
 **What:**

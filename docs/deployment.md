@@ -85,6 +85,58 @@ Four more customers (`jose`, `ana`, `pedro`, `liza` `@example.com`, password `cu
 
 ---
 
-## 6. Separate copy of the old project
+## 6. Live hosting: FourSys (SSH deploy)
+
+The graded site runs at **https://orange-cobra-186442.foursyscloud.com** (FourSys, a HestiaCP panel, PHP 8.3 FPM).
+
+**Layout on the server** (`~/web/orange-cobra-186442.foursyscloud.com/`):
+
+| Path | Holds |
+|---|---|
+| `private/bukidbasket/` | App code (`src/`, `views/`, `database/`, `scripts/`, `public/`), the production `.env.local` and a `REVISION` file. It can't be reached over HTTP, but it is inside PHP's `open_basedir`. |
+| `public_html/` | A copy of `public/` plus a shim `index.php` that loads `private/bukidbasket/public/index.php`. |
+
+**One-time setup per computer.** Ask a teammate to add your SSH public key in the FourSys panel (or to `~/.ssh/authorized_keys`), then add this to `~/.ssh/config`:
+
+```
+Host bukidbasket
+    HostName ssh.foursyscloud.com
+    Port 65002
+    User fs000031
+    IdentityFile ~/.ssh/bukidbasket_deploy
+    IdentitiesOnly yes
+```
+
+**Deploy** (sends the committed code only; uncommitted edits are never deployed):
+
+```powershell
+.\scripts\deploy.ps1          # deploys HEAD
+.\scripts\deploy.ps1 master   # deploys a branch, tag or commit
+```
+
+**Automatic deploy on push.** `.github/workflows/deploy.yml` deploys every push to `master`. It runs `verify.php`, then `scripts/deploy.sh` with the pushed commit, then checks that the home page returns HTTP 200. To redeploy without pushing, open the Actions tab, pick **Deploy**, then **Run workflow**. It needs two repository secrets (*Settings → Secrets and variables → Actions*):
+
+| Secret | Value |
+|---|---|
+| `FOURSYS_SSH_KEY` | Private key of the GitHub-only deploy key (`bukidbasket-github-actions`; its public half is in the server's `~/.ssh/authorized_keys`). |
+| `FOURSYS_KNOWN_HOSTS` | Output of `ssh-keyscan -p 65002 ssh.foursyscloud.com`, so the runner refuses an impostor server. |
+
+To revoke GitHub's access, delete the `bukidbasket-github-actions` line from the server's `~/.ssh/authorized_keys`.
+
+From Git Bash: `bash scripts/deploy.sh`. The script `git archive`s `public src views database scripts`, uploads them to `~/tmp` on the server, and runs `scripts/server-deploy.sh`. That script runs `php scripts/verify.php` (it stops on failure), rsyncs the code into `private/bukidbasket/`, rsyncs `public/` into `public_html/`, and writes the shim. It never sends or overwrites the server's `.env.local`.
+
+**Production `.env.local`** lives only at `private/bukidbasket/.env.local` (mode 600). It sets `APP_ENV=production` and an `APP_SECRET` generated on the server. `DB_NAME`, `DB_USER` and `DB_PASS` come from the database created in the FourSys panel (MariaDB 11.4; the panel adds the `fs000031_` prefix to both names). Use `DB_HOST=127.0.0.1`, not `localhost`: with `localhost`, PDO tries a Unix socket at the wrong path and fails with `SQLSTATE[HY000] [2002] No such file or directory`. To import or reset the database:
+
+```bash
+ssh bukidbasket
+cd ~/web/orange-cobra-186442.foursyscloud.com/private/bukidbasket
+mysql -u "$DB_USER" -p "$DB_NAME" < database/schema.sql   # drops and recreates every table
+php database/seed.php
+php scripts/check-db.php
+```
+
+---
+
+## 7. Separate copy of the old project
 
 Bukid Basket was copied from the Hook & Box (seafood) project into its own folder and git repository on 2026-11-22. It uses its own database name, `bukidbasket`, so the old `hookandbox` database is never touched by this app's schema import or seed.

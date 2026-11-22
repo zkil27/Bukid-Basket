@@ -1,0 +1,71 @@
+name: Deploy
+
+# Every push to master goes live on FourSys. "Run workflow" on the Actions tab
+# redeploys by hand. See docs/deployment.md, section 6.
+on:
+  push:
+    branches: [master]
+  workflow_dispatch:
+
+# One deploy at a time; never cancel one halfway through an rsync.
+concurrency:
+  group: deploy-foursys
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: deploy to FourSys
+    runs-on: ubuntu-latest
+    environment:
+      name: production
+      url: https://orange-cobra-186442.foursyscloud.com
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          lfs: false
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          extensions: pdo, pdo_mysql, mbstring, openssl, json
+
+      - name: Verify before deploying
+        run: php scripts/verify.php
+
+      - name: Configure SSH
+        env:
+          SSH_KEY: ${{ secrets.FOURSYS_SSH_KEY }}
+          KNOWN_HOSTS: ${{ secrets.FOURSYS_KNOWN_HOSTS }}
+        run: |
+          if [ -z "$SSH_KEY" ] || [ -z "$KNOWN_HOSTS" ]; then
+            echo "::error::Add the FOURSYS_SSH_KEY and FOURSYS_KNOWN_HOSTS repository secrets (docs/deployment.md, section 6)."
+            exit 1
+          fi
+          install -m 700 -d ~/.ssh
+          printf '%s\n' "$SSH_KEY" > ~/.ssh/foursys
+          chmod 600 ~/.ssh/foursys
+          printf '%s\n' "$KNOWN_HOSTS" > ~/.ssh/known_hosts
+          cat > ~/.ssh/config <<'EOF'
+          Host bukidbasket
+              HostName ssh.foursyscloud.com
+              Port 65002
+              User fs000031
+              IdentityFile ~/.ssh/foursys
+              IdentitiesOnly yes
+              StrictHostKeyChecking yes
+          EOF
+
+      - name: Deploy
+        run: bash scripts/deploy.sh "$GITHUB_SHA"
+
+      - name: Smoke test
+        run: |
+          code=$(curl -s -o /dev/null -w '%{http_code}' -m 30 https://orange-cobra-186442.foursyscloud.com/)
+          echo "Home page returned HTTP $code"
+          [ "$code" = "200" ]
+
+      - name: Remove SSH key
+        if: always()
+        run: rm -f ~/.ssh/foursys
